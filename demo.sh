@@ -1,4 +1,5 @@
 #!/bin/bash
 docker build -t docker-zfs-demo .
-echo "Running docker image, use 'zfs' command in here to play around."
-docker run --privileged -ti -v /dev/zfs:/dev/zfs docker-zfs-demo bash
+echo "Running docker image, run /setup.sh, "
+echo "then use zpool/zfs command in here to play around."
+docker run --privileged -v /lib/modules:/lib/modules -v /var/lib/dvol:/var/lib/dvol -ti docker-zfs-demo bash
