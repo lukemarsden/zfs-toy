@@ -8,15 +8,15 @@ POOL=dvol_pool
 if [ ! -d $DIR ]; then
     mkdir -p $DIR
 fi
-if [ ! modinfo zfs >/dev/null 2>&1 ]; then
+if ! modinfo zfs >/dev/null 2>&1; then
     modprobe zfs
 fi
 if [ ! -e /dev/zfs ]; then
     mknod -m 660 /dev/zfs c $(cat /sys/class/misc/zfs/dev |sed 's/:/ /g')
 fi
 if [ ! -f $FILE ]; then
-    truncate -s 100G $FILE
+    truncate -s 10000G $FILE
     zpool create $POOL $FILE
-elif
+elif ! zpool status $POOL; then
     zpool import -d $DIR $POOL
 fi
