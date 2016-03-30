@@ -6,3 +6,4 @@ Ubuntu 16.04 ships with zfs kernel module binary, so the hard part is already do
 ## demo
 
 Run `./demo.sh` as a user who can run docker.
+
