@@ -9,7 +9,9 @@ if [ ! -d $DIR ]; then
     mkdir -p $DIR
 fi
 if ! modinfo zfs >/dev/null 2>&1; then
-    modprobe zfs
+    if ! modprobe zfs; then
+        ./fetch_zfs_from_clusterhq.sh
+    fi
 fi
 if [ ! -e /dev/zfs ]; then
     mknod -m 660 /dev/zfs c $(cat /sys/class/misc/zfs/dev |sed 's/:/ /g')
